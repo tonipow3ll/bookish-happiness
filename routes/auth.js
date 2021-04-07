@@ -5,10 +5,13 @@ const router = express.Router();
 // auth with google
 // route - GET /auth/google
 
-router.get('/google', passport.authenticate('google', { scope: profile }))
+router.get('/google', passport.authenticate('google', { scope: ['profile'] }))
 
-router.get('/dashboard', (req, res) => {
-    res.render('dashboard')
+// google auth callback
+// /auth/google/callback
+router.get('/google/callback', passport.authenticate('google', {failureRedirect: '/'}), 
+    (req, res) => {
+    res.redirect('/dashboard')
 })
 
 module.exports = router
