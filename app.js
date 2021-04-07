@@ -1,9 +1,11 @@
 const path = require('path')
 const express = require('express');
+const mongoose = require('mongoose')
 const dotenv = require('dotenv');
 const exphbs = require('express-handlebars')
 const passport = require('passport');
 const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 const connectDB = require('./config/db')
 
 // load config 
@@ -20,12 +22,12 @@ const app = express();
 app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
-// express session msut be above passport middleware
+// express session msut be above passport middleware 
 app.use(session({
     secret: 'secret secret',
     resave: false,
     saveUninitialized: false,
-    // will store value here later 
+    store: new MongoStore({ mongooseConnection: mongoose.connection})
 }))
 
 //passport middleware
