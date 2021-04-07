@@ -19,7 +19,18 @@ connectDB()
 
 const app = express();
 
-app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs' }));
+// body parser
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+
+//handlebars helpers
+const { formatDate, stripTags, truncate } = require('./helpers/hbs')
+
+// handlebars
+app.engine('.hbs', exphbs({
+    helpers: {formatDate, stripTags, truncate },
+     defaultLayout: 'main', 
+     extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
 // express session msut be above passport middleware 
@@ -40,6 +51,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // Routes
 app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
+app.use('/posts', require('./routes/posts'))
 
 const PORT = process.env.PORT || 5000;
 
