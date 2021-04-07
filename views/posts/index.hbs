@@ -4,7 +4,8 @@
         <div class="col s12 m4">
             <div class="card">
                 <div class="card-image">
-                    {{!-- todo, edit icon  --}}
+                    {{!-- edit icon will only show on specific users posts (ie. Toni made a blog post, Toni can only edit 'toni's' posts. not Jacks. ) --}}
+                    {{{editIcon user ../user _id}}}
                 </div>
                 <div class="card-content center-align">
                     <h5>{{title}}</h5>

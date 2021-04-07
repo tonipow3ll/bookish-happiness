@@ -18,6 +18,18 @@ module.exports = {
       // stirps tags (<p>, etc)
       stripTags: function (input) {
         return input.replace(/<(?:.|\n)*?>/gm, '')
-      }
-
+      },
+      // checks the postUser id against the logged in users ID, if they match, edit icon will appear 
+      editIcon: function (postUser, loggedUser, postId, floating = true) {
+        if (postUser._id.toString() == loggedUser._id.toString()) {
+          if (floating) {
+            return `<a href="/posts/edit/${postId}" class="btn-floating halfway-fab blue"><i class="fas fa-edit fa-small"></i></a>`
+          } else {
+            return `<a href="/posts/edit/${postId}"><i class="fas fa-edit"></i></a>`
+          }
+        } else {
+          return ''
+        }
+      },
+ 
 }
