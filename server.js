@@ -80,7 +80,7 @@ app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
 app.use('/posts', require('./routes/posts'))
 
-const PORT = process.env.MONGO_URI 
+const PORT = process.env.MONGO_URI || process.env.PORT
 // || 5000;
 //
 
