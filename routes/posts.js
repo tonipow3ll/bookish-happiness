@@ -39,6 +39,26 @@ router.get('/', ensureAuth, async (req, res) => {
     res.render('error/500')
  }});
 
+ // show single post
+ router.get('/:id', ensureAuth, async (req, res) => {
+    try {
+        let post = await Posts.findById(req.params.id)
+        .populate('user')
+        .lean()
+
+        if(!post) {
+            return res.render('error/404')
+        }
+
+        res.render('posts/show', {
+            post
+        })
+    } catch(err) {
+        console.error(err)
+        res.render('error/404')
+    }
+});
+
  // show post/edit page
  // get post/edit/:id
  router.get('/edit/:id', ensureAuth, async (req, res) => {
