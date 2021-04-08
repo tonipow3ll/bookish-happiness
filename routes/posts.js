@@ -42,9 +42,7 @@ router.get('/', ensureAuth, async (req, res) => {
  // show single post
  router.get('/:id', ensureAuth, async (req, res) => {
     try {
-        let post = await Posts.findById(req.params.id)
-        .populate('user')
-        .lean()
+        let post = await Posts.findById(req.params.id).populate('user').lean()
 
         if(!post) {
             return res.render('error/404')
