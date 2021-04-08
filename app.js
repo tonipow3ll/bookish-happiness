@@ -54,6 +54,13 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection})
 }))
 
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// req.isAuthenticated is provided from the auth router
+app.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+});
 //passport middleware
 app.use(passport.initialize())
 app.use(passport.session())

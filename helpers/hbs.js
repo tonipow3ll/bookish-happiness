@@ -1,4 +1,5 @@
 const moment = require('moment');
+const Posts = require('../models/Posts');
 
 module.exports = {
     formatDate: function (date, format) {
@@ -21,6 +22,12 @@ module.exports = {
       },
       // checks the postUser id against the logged in users ID, if they match, edit icon will appear 
       editIcon: function (postUser, loggedUser, postId, floating = true) {
+        console.log("postUser")
+        console.log(postUser)
+        console.log("loggedUser")
+        console.log(loggedUser)
+        console.log("Posts")
+        console.log(Posts)
         if (postUser._id.toString() == loggedUser._id.toString()) {
           if (floating) {
             return `<a href="/posts/edit/${postId}" class="btn-floating halfway-fab blue"><i class="fas fa-edit fa-small"></i></a>`
