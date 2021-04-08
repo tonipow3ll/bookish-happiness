@@ -26,8 +26,6 @@ module.exports = {
         console.log(postUser)
         console.log("loggedUser")
         console.log(loggedUser)
-        console.log("Posts")
-        console.log(Posts)
         if (postUser._id.toString() == loggedUser._id.toString()) {
           if (floating) {
             return `<a href="/posts/edit/${postId}" class="btn-floating halfway-fab blue"><i class="fas fa-edit fa-small"></i></a>`

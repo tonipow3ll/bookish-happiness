@@ -76,7 +76,7 @@ app.use('/posts', require('./routes/posts'))
 
 //this has to be in this order, or it breaks on Heroku
 // process.env.PORT || process.env.MONGO_URI 
-const PORT = process.env.PORT || process.env.MONGO_URI 
+const PORT = 3000 || process.env.MONGO_URI 
 // || 3000;
 //
 

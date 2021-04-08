@@ -60,9 +60,7 @@ router.get('/', ensureAuth, async (req, res) => {
  // show post/edit page
  // get post/edit/:id
  router.get('/edit/:id', ensureAuth, async (req, res) => {
-    const post = await Posts.findOne({
-        _id: req.params.id
-    }).lean()
+    const post = await Posts.findOne({ _id: req.params.id}).lean()
     if(!post) {
         return res.render('error/404')
     } 
