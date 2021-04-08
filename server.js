@@ -54,13 +54,7 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection})
 }))
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-// app.use(auth(config));
 
-// // req.isAuthenticated is provided from the auth router
-// app.get('/', (req, res) => {
-//   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-// });
 //passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
@@ -80,8 +74,10 @@ app.use('/', require('./routes/index'))
 app.use('/auth', require('./routes/auth'))
 app.use('/posts', require('./routes/posts'))
 
+//this has to be in this order, or it breaks on Heroku
+// process.env.PORT || process.env.MONGO_URI 
 const PORT = process.env.PORT || process.env.MONGO_URI 
-// || 5000;
+// || 3000;
 //
 
 app.listen(PORT, console.log(`Server listening on PORT ${PORT}!`))
