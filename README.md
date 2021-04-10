@@ -20,8 +20,7 @@
 `Connect-Mongo`   
 `Dotenv`   
 `Express`   
-`Express-Handlebars`   
-`Express-OpenId-Connect`   
+`Express-Handlebars`      
 `Express-session`   
 `Method-Override`   
 `Moment`   
