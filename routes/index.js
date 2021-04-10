@@ -12,6 +12,13 @@ router.get('/', ensureGuest, (req, res) => {
     })
 })
 
+router.get('/signup', ensureGuest, (req,res) => {
+    res.render('signup', {
+        layout: 'login',
+    })
+}), 
+  
+
 router.get('/dashboard', ensureAuth, async (req, res) => {
     // console.log(req.user)
     try{

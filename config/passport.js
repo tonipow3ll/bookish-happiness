@@ -1,4 +1,6 @@
+// const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require ('mongoose');
 const User = require('../models/User');
 
@@ -15,7 +17,8 @@ module.exports = function(passport) {
             displayName: profile.displayName,
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,
-            image: profile.photos[0].value
+            image: profile.photos[0].value,
+            email: profile.emails[0].value
         }
         try {
             let user = await User.findOne({ googleId: profile.id})
@@ -29,6 +32,28 @@ module.exports = function(passport) {
             console.error(err)
         }
     }))
+
+// This is how you initialize the local strategy module
+
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    session: false
+  },
+    function (email, password, done) {
+      User.findOne({ where: { 'email': email } }, function (err, user) {
+        if (err) { return done(err) }
+        if (!User) {
+          return done(null, false, { message: 'incorrect username or password' });
+        }
+        if (User.password != password) { return done(null, false,{ message: 'incorrect username or password' }  ); } 
+        // {
+        //   return done(null, false, { message: 'incorrect username or password' });
+        // }
+        // return done(null, User)
+      })
+    }
+  ))
     passport.serializeUser((user, done) => {
         done(null, user.id)
       })

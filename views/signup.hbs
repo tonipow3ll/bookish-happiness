@@ -1,12 +1,12 @@
 <h3>Tech Blog</h3>
 <div class="section">
-    <p class="lead">What's on your mind? Share it with the world!</p>
+    <p class="lead">Sign up here!</p>
 </div>
 {{!-- 
    <form action="/posts/{{post._id}}" method="POST" class="col s12">
     <input type="hidden" name="_method" value="PUT"> --}}
 
-<form action="/login" method="POST" >
+<form action="/signup" method="POST" >
     <div class="field">
         <div class="control email-login">
             <input class="input is-large" type="text" id="email-login" placeholder="Your Email" autofocus="">
@@ -18,7 +18,7 @@
             <input class="input is-large" type="password" id="password-login" placeholder="Your Password">
         </div>
     </div>
-    <a class="button waves-effect btn" id="loginbtn" type="submit">Login<i class="fa fa-sign-in" aria-hidden="true"></i></a>
+    {{!-- <a class="button waves-effect btn" id="loginbtn" type="submit">Login<i class="fa fa-sign-in" aria-hidden="true"></i></a> --}}
    
     <a href="/signup" class="button waves-effect btn" type="submit">Sign Up<i class="fa fa-sign-in" aria-hidden="true"></i></a>
 </form>
@@ -27,7 +27,7 @@
 <div class="divider"></div>
 <div class="section">
     <a href="/auth/google" class="btn darken-1">
-        <i class="fab fa-google left"></i>Log In With Google</a>
+        <i class="fab fa-google left"></i>Sign Up With Google</a>
 </div>
 
 {{!-- <script src="/js/login.js"></script> --}}
