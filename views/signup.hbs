@@ -46,13 +46,13 @@ const signupFormHandler = (event) => {
     //NEED TO CHANGE DOCUMENT.LOCATION.REPLACE WITH /USER INFO HERE
     event.preventDefault();
     console.log("HELELLOOOKJSDLFJASLDKFLK")
-    const displayName = document.querySelector('#fullName')
+    const displayName = document.querySelector('#displayName')
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
-    if (email && password) {
-      const response = fetch('/signup', {
+    if (displayName && email && password) {
+      const response = fetch('/auth/signup', {
         method: 'POST',
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ displayName, email, password }),
         headers: { 'Content-Type': 'application/json' },
       }).then((response) => {
         if (response.ok) {
