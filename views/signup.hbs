@@ -7,6 +7,13 @@
     <input type="hidden" name="_method" value="PUT"> --}}
 
 <form action="/signup" method="POST" class="signup-form">
+
+   <div class="field">
+        <div class="control email-login">
+            <input class="input is-large" type="text" id="displayName" placeholder="Full Name" autofocus="">
+        </div>
+    </div>
+
     <div class="field">
         <div class="control email-login">
             <input class="input is-large" type="text" id="email-signup" placeholder="Your Email" autofocus="">
@@ -33,12 +40,13 @@
 <script>
 
     console.log("ready!");
-    
+
 const signupFormHandler = (event) => {
 
     //NEED TO CHANGE DOCUMENT.LOCATION.REPLACE WITH /USER INFO HERE
     event.preventDefault();
     console.log("HELELLOOOKJSDLFJASLDKFLK")
+    const displayName = document.querySelector('#fullName')
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
     if (email && password) {

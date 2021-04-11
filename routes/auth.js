@@ -35,14 +35,13 @@ router.post('/login', passport.authenticate('local', {
 router.post('/signup', async (req, res) => {
     try {
       const newUser = await User.create({
+        displayName: req.body.displayName,
         email: req.body.email,
         password: req.body.password
       });
-  
       console.log(newUser)
       //  return res.redirect(`/`)
       return res.redirect(`/dashboard`)
-        
      
     } catch (err) {
       console.log(err)
