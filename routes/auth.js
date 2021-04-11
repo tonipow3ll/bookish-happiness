@@ -40,7 +40,6 @@ router.post('/signup', async (req, res) => {
         password: req.body.password
       });
       console.log(newUser)
-      //  return res.redirect(`/`)
       return res.redirect(`/dashboard`)
      
     } catch (err) {
