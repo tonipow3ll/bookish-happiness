@@ -6,19 +6,19 @@
    <form action="/posts/{{post._id}}" method="POST" class="col s12">
     <input type="hidden" name="_method" value="PUT"> --}}
 
-<form action="/signup" method="POST" >
+<form action="/signup" method="POST" class="signup-form">
     <div class="field">
         <div class="control email-login">
-            <input class="input is-large" type="text" id="email-login" placeholder="Your Email" autofocus="">
+            <input class="input is-large" type="text" id="email-signup" placeholder="Your Email" autofocus="">
         </div>
     </div>
 
     <div class="field">
         <div class="control password-login">
-            <input class="input is-large" type="password" id="password-login" placeholder="Your Password">
+            <input class="input is-large" type="password" id="password-signup" placeholder="Your Password">
         </div>
     </div>
-    {{!-- <a class="button waves-effect btn" id="loginbtn" type="submit">Login<i class="fa fa-sign-in" aria-hidden="true"></i></a> --}}
+
    
     <a href="/signup" class="button waves-effect btn" type="submit">Sign Up<i class="fa fa-sign-in" aria-hidden="true"></i></a>
 </form>
@@ -30,4 +30,31 @@
         <i class="fab fa-google left"></i>Sign Up With Google</a>
 </div>
 
-{{!-- <script src="/js/login.js"></script> --}}
+<script>
+
+    console.log("ready!");
+    
+const signupFormHandler = (event) => {
+
+    //NEED TO CHANGE DOCUMENT.LOCATION.REPLACE WITH /USER INFO HERE
+    event.preventDefault();
+    console.log("HELELLOOOKJSDLFJASLDKFLK")
+    const email = document.querySelector('#email-signup').value.trim();
+    const password = document.querySelector('#password-signup').value.trim();
+    if (email && password) {
+      const response = fetch('/signup', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: { 'Content-Type': 'application/json' },
+      }).then((response) => {
+        if (response.ok) {
+          document.location.replace('/');
+        } else {
+          alert('Failed to sign up.');
+        }
+      });
+    }
+  };
+  document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
+
+</script>

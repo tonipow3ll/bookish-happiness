@@ -33,27 +33,61 @@ module.exports = function(passport) {
         }
     }))
 
+// ==========================
+// PASSPORT LOCAL ONLY 
+// ==========================
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+  session: false
+},
+  function (email, password, done) {
+    User.findOne({ where: { 'email': email } }, function (err, user) {
+      if (err) { return done(err) }
+      if (!User) {
+        return done(null, false, { message: 'incorrect username or password' });
+      }
+      if (!User.validPassword(password)) {
+        return done(null, false, { message: 'incorrect username or password' });
+      }
+      return done(null, User)
+    })
+  }
+));
+
 // This is how you initialize the local strategy module
 
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password',
-    session: false
-  },
-    function (email, password, done) {
-      User.findOne({ where: { 'email': email } }, function (err, user) {
-        if (err) { return done(err) }
-        if (!User) {
-          return done(null, false, { message: 'incorrect username or password' });
-        }
-        if (User.password != password) { return done(null, false,{ message: 'incorrect username or password' }  ); } 
-        // {
-        //   return done(null, false, { message: 'incorrect username or password' });
-        // }
-        // return done(null, User)
-      })
-    }
-  ))
+// passport.use(new LocalStrategy({
+//     usernameField: 'email',
+//     passwordField: 'password',
+//     // might not need these two
+//     // passReqToCallback: true,
+//     // session: false
+//   },
+//     function (email, password, done) {
+//       User.findOne({ where: { 'email': email } }, function (err, user) {
+//         if (err) { return done(err) }
+//         if (!User) {
+//           return done(null, false, { message: 'incorrect username or password' });
+//         } if (User.password != password) { return done(null, false,{ message: 'incorrect username or password' } )}
+//         else {
+//           let newUser = new User();
+
+//           newUser.local.email = email;
+//           newUser.local.password = newUser.generateHash(password);
+//           newUser.save(function(err) {
+//             if (err)
+//               throw err;
+//               return done(null, newUser)
+//           })
+//         } 
+//         // {
+//         //   return done(null, false, { message: 'incorrect username or password' });
+//         // }
+//         // return done(null, User)
+//       })
+//     }
+//   ))
     passport.serializeUser((user, done) => {
         done(null, user.id)
       })

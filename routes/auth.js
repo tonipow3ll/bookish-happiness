@@ -26,20 +26,44 @@ router.post('/login', function(req, res, next) {
     })(req, res, next);
 });
 
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/dashboard',
+    failureRedirect: '/login'
+}))
 
-router.post('/signup', function(req, res, next) {
-    passport.authenticate('local', function(err, user, info) {
-        let newUser = User.findOne({ where: email === req.body.email })
-        if (err) { return next(err); }
-        if (!newUser) { User.create([
-            {
-                email: req.body.email,
-                password: req.body.password
-            }
-        ])}
-        req.login(user, next);
-    })(req, res, next);
-});
+// POST ROUTE FOR SIGNUP 
+router.post('/signup', async (req, res) => {
+    try {
+      const newUser = await User.create({
+        email: req.body.email,
+        password: req.body.password
+      });
+  
+      console.log(newUser)
+      //  return res.redirect(`/`)
+      return res.redirect(`/login`)
+        
+     
+    } catch (err) {
+      console.log(err)
+      return res.status(400).json(err)
+    }
+  });
+
+
+// router.post('/signup', function(req, res, next) {
+//     passport.authenticate('local', function(err, user, info) {
+//         let newUser = User.findOne({ where: email === req.body.email })
+//         if (err) { return next(err); }
+//         if (!newUser) { User.create([
+//             {
+//                 email: req.body.email,
+//                 password: req.body.password
+//             }
+//         ])}
+//         req.login(user, next);
+//     })(req, res, next);
+// });
 // router.post('/login',  passport.authenticate('local', {failureRedirect: '/login'}), (req, res) => {
 //     try{
 //         const newUser =  User.findOne({ where: {email: req.body.email } });
