@@ -41,7 +41,7 @@ router.post('/signup', async (req, res) => {
   
       console.log(newUser)
       //  return res.redirect(`/`)
-      return res.redirect(`/login`)
+      return res.redirect(`/dashboard`)
         
      
     } catch (err) {
