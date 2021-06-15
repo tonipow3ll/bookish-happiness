@@ -114,7 +114,7 @@ router.delete('/:id', ensureAuth, async (req, res) => {
 });
 
 // get all posts from a user
-// get 
+// Should show all posts from a specific user - right now defaults to the error 500 page
 router.get('/user/:userId', ensureAuth, async  (req, res) => {
     try {
         const post = await Posts.find({
