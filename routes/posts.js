@@ -113,6 +113,8 @@ router.delete('/:id', ensureAuth, async (req, res) => {
     }
 });
 
+// get all posts from a user
+// get 
 router.get('/user/:userId', ensureAuth, async  (req, res) => {
     try {
         const post = await Posts.find({
